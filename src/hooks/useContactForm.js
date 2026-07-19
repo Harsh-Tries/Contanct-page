@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { sendEmailViaEmailJS } from '../utils/emailService';
-import { sendEmailViaBackend } from '../utils/api';
 import toast from 'react-hot-toast';
 
 /**
  * Custom React Hook to manage validation and submission logic of the contact form.
- * Supports switching between EmailJS and Backend API.
  */
 export const useContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,7 +24,6 @@ export const useContactForm = () => {
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
-    const useBackend = import.meta.env.VITE_USE_BACKEND === 'true';
 
     // Show loading toast that we can dismiss later
     const loadingToastId = toast.loading('Sending your message, please wait...', {
@@ -38,11 +35,7 @@ export const useContactForm = () => {
     });
 
     try {
-      if (useBackend) {
-        await sendEmailViaBackend(data);
-      } else {
-        await sendEmailViaEmailJS(data);
-      }
+      await sendEmailViaEmailJS(data);
       
       toast.success('Thank you! Your message was sent successfully. 👋', {
         id: loadingToastId,
@@ -79,3 +72,4 @@ export const useContactForm = () => {
     isSubmitting,
   };
 };
+

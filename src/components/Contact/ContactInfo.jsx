@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin } from 'lucide-react';
 
-export default function ContactInfo() {
-  const cards = [
+export default function ContactInfo({ types = ['phone', 'email', 'office'] }) {
+  const allCards = [
     {
       type: 'phone',
       title: 'Phone',
@@ -31,6 +31,8 @@ export default function ContactInfo() {
       description: 'Come say hello at our headquarters.'
     }
   ];
+
+  const cards = allCards.filter(card => types.includes(card.type));
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -21,7 +21,7 @@ export const sendEmailViaEmailJS = async (data) => {
 
   const templateParams = {
     name: data.name,
-    email: data.email,
+    user_email: data.email,
     message: data.message,
   };
 

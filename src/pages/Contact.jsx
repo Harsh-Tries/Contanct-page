@@ -7,6 +7,7 @@ import Illustration from '../components/Contact/Illustration';
 import GoogleMap from '../components/Contact/GoogleMap';
 import SocialLinks from '../components/Contact/SocialLinks';
 
+
 export default function Contact() {
   return (
     <>
@@ -31,44 +32,46 @@ export default function Contact() {
           {/* Hero Section */}
           <Hero />
 
-          {/* Core Layout Grid (Desktop: Left 25%, Center 40%, Right 35%) */}
-          <div className="flex flex-col lg:flex-row gap-8 items-start w-full">
-            {/* Left Section (25% Contact Info) */}
+          {/* Core Layout Grid (Desktop: Left 30%, Center 40%, Right 30%) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[30%_40%_30%] gap-8 w-full lg:items-stretch">
+            {/* Left Section — Contact Info (Phone & Social) */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="w-full lg:w-[25%] flex-shrink-0"
+              className="w-full order-1 lg:order-1 flex flex-col gap-6 h-full justify-between"
             >
-              <ContactInfo />
+              <ContactInfo types={['phone']} />
+              <SocialLinks />
             </motion.div>
 
-            {/* Center Section (40% Contact Form) */}
+            {/* Center Section — Contact Form */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="w-full lg:w-[40%] flex-shrink-0"
+              className="w-full order-2 lg:order-2 flex min-h-0"
             >
               <ContactForm />
             </motion.div>
 
-            {/* Right Section (35% Modern SVG Illustration) */}
+            {/* Right Section — Office and Email */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="w-full lg:w-[35%] flex-shrink-0"
+              className="w-full order-3 lg:order-3 flex flex-col gap-6 h-full justify-between"
             >
-              <Illustration />
+              <ContactInfo types={['email']} />
+              <ContactInfo types={['office']} />
             </motion.div>
           </div>
 
           {/* Responsive Dark Map */}
           <GoogleMap />
 
-          {/* Social Media Links & Footer */}
-          <SocialLinks />
+          {/* Footer */}
+          
         </main>
       </div>
     </>
